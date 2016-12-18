@@ -18,12 +18,16 @@ import javax.swing.JDesktopPane;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class MainMenu extends JFrame {
 
 	private JPanel contentPane;
 	private HelloFrame helloframe;
 	private JDesktopPane desktopPane;
+	private JButton toolbarExit;
+	private JButton btnNewButton_1;
+	private JButton toolbarHello;
 
 	/**
 	 * Launch the application.
@@ -50,6 +54,7 @@ public class MainMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public MainMenu() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainMenu.class.getResource("/image32/user_suit.png")));
 		setExtendedState(Frame.MAXIMIZED_BOTH);
 		setTitle("Main Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,8 +91,8 @@ public class MainMenu extends JFrame {
 		JToolBar toolBar = new JToolBar();
 		contentPane.add(toolBar, BorderLayout.NORTH);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(new ActionListener() {
+		toolbarHello = new JButton("Show Hello");
+		toolbarHello.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(helloframe == null || helloframe.isClosed()){
 					helloframe = new HelloFrame();
@@ -103,16 +108,21 @@ public class MainMenu extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setIcon(new ImageIcon(MainMenu.class.getResource("/image32/alarm_bell.png")));
-		toolBar.add(btnNewButton);
+		toolbarHello.setIcon(new ImageIcon(MainMenu.class.getResource("/image32/alarm_bell.png")));
+		toolBar.add(toolbarHello);
 		
-		JButton btnNewButton_1 = new JButton("New button");
+		btnNewButton_1 = new JButton("New button");
 		btnNewButton_1.setIcon(new ImageIcon(MainMenu.class.getResource("/image32/apple.png")));
 		toolBar.add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("New button");
-		btnNewButton_2.setIcon(new ImageIcon(MainMenu.class.getResource("/image32/application_xp_terminal.png")));
-		toolBar.add(btnNewButton_2);
+		toolbarExit = new JButton("Exit");
+		toolbarExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		toolbarExit.setIcon(new ImageIcon(MainMenu.class.getResource("/image32/application_xp_terminal.png")));
+		toolBar.add(toolbarExit);
 		
 		desktopPane = new JDesktopPane();
 		contentPane.add(desktopPane, BorderLayout.CENTER);
